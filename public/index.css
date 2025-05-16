@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.fa-magnifying-glass {
+  color: white;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-center.center.desc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 1.5em auto;
+}
+
+.header-center {
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.left-margin {
+  margin: 0px 16px;
+}
+
+#uv-error {
+  color: #ff6666 !important;
+  white-space: pre-wrap;
+}
+
+#uv-error-code {
+  font-size: 12px;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#uv-register-sw {
+  color: white;
+  background: #555555;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  padding: 16px 20px;
+  line-height: 16px;
+  display: none;
+}
+
+#uv-register-sw:active {
+  background: #333333;
+}
+
+#uv-register-sw.show {
+  display: block;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
+.logo-wrapper .text {
+  font-size: 75px;
+  color: #fff;
+}
+
+.logo-wrapper h1 {
+  color: white;
+}
+
+.logo-wrapper.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+footer {
+  margin-top: auto;
+  width: 93%;
+  align-self: center;
+  height: 80px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+footer a,
+footer span {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+footer a {
+  cursor: pointer;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.desc p {
+  width: 560px;
+  color: rgba(253, 253, 253, 0.514);
+}
+
+#uv-address {
+  background: none;
+  font-family: inherit;
+  padding: 0px 17px;
+  height: 48px;
+  border: 1px solid rgb(255, 255, 255, 0.2);
+  color: var(--text-color);
+  border-radius: 3px;
+  outline: none;
+  width: 350px;
+  margin-top: 5px;
+  border-radius: 50px;
+  color: #fff;
+  transition: border-radius 0.1s;
+}
+
+#uv-address:focus {
+  border: 1px solid rgba(253, 253, 253, 0.514);
+  border-radius: 6px;
+}
+
+.credit {
+  border-radius: 10px;
+  padding: 10px;
+  display: block;
+  border: #fff 1px solid;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.credit label {
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+.credit a,
+.credit label {
+  color: white;
+  text-decoration: underline;
+  text-align: right;
+}
+
+.credit pre {
+  display: none;
+  width: 100%;
+}
+
+.credit label::after {
+  content: "show license";
+  cursor: pointer;
+}
+
+.credit input:checked + label::after {
+  content: "hide license";
+}
+
+.credit input:checked ~ pre {
+  display: block;
+}
+
+.floating-navbar {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(40, 44, 52, 0.95);
+  border-radius: 2em;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  padding: 0.5em 2em;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  width: max-content;
+  min-width: 340px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.navbar-logo {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #2e3440;
+}
+
+.navbar-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15em;
+  letter-spacing: 0.03em;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5em;
+}
+
+.floating-navbar .nav-item {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5em 1.2em;
+  border-radius: 1.5em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.floating-navbar .nav-item:hover,
+.floating-navbar .nav-item.active {
+  background: #1e5ca8;
+  color: #fff;
+}
+
+.credits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  max-width: 700px;
+  margin: 2em auto 3em auto;
+  padding: 0 1em;
+}
+
+.credit-card {
+  background: rgba(36, 36, 36, 0.616);
+  border-radius: 1.5em;
+  box-shadow: 0 2px 16px rgb(255, 255, 255);
+  padding: 1.5em 2em;
+  color: #eceff4;
+  border: 1px solid #0055ff;
+  transition: box-shadow 0.2s;
+}
+
+.credit-card h2 {
+  margin-top: 0;
+  color: #ffffff;
+  font-size: 1.3em;
+}
+
+.credit-card a {
+  color: #0084ff;
+  text-decoration: underline;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  display: inline-block;
+}
+
+.credit-card pre {
+  background: none;
+  color: #ffffff;
+  font-size: 0.98em;
+  border: none;
+  padding: 0;
+  margin-top: 1em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+.music-player {
+  position: fixed;
+  left: 50%;
+  bottom: 70px;
+  transform: translateX(-50%);
+  background: rgba(47, 49, 51, 0.98);
+  border-radius: 1.5em;
+  box-shadow: 0 2px 16px rgb(255, 255, 255);
+  padding: 1em 2em 1em 1.5em;
+  z-index: 999;
+  min-width: 320px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.music-controls button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.3em;
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+
+.music-controls button:hover {
+  background: #5f5f5f70;
+}
+
+.music-title {
+  color: #eceff4;
+  font-weight: 500;
+  margin-left: 1.2em;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.music-playlist {
+  display: flex;
+  gap: 0.7em;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.3em;
+}
+
+.music-playlist .playlist-item {
+  background: #434c5e;
+  color: #eceff4;
+  border-radius: 1em;
+  padding: 0.3em 1em;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: background 0.15s;
+  border: none;
+  outline: none;
+}
+
+.music-playlist .playlist-item.active,
+.music-playlist .playlist-item:hover {
+  background: #1966c5;
+  color: #fff;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: 1em;
+}
+
+#volume-slider {
+  width: 70px;
+  accent-color: #00fcfc;
+  vertical-align: middle;
+  margin-left: 0.2em;
+}

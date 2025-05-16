@@ -85,3 +85,8 @@ fastify.listen({
 	port: port,
 	host: "0.0.0.0",
 });
+
+if (url && window.__uv$config && window.__uv$config.encodeUrl && window.__uv$config.prefix) {
+  iframe.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+  searchInput.value = url;
+}

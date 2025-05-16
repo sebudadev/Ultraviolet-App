@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>sebudaca | Home </title>
+    <meta
+      name="description"
+      content="sebudaca is a lightning-fast, secure web proxy designed to give you private and unrestricted access to the internet."
+    />
+    <meta
+      name="keywords"
+      content="sebudaca, education, entertainment, apps, sebudadev"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#434c5e"
+    />
+    <meta name="googlebot" content="index, follow, snippet" />
+    <link rel="shortcut icon" content="favicon.ico" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="uv/uv.bundle.js" defer></script>
+    <script src="uv/uv.config.js" defer></script>
+    <script src="register-sw.js" defer></script>
+    <script src="search.js" defer></script>
+    <script src="index.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is sebudaca (Web Proxy)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "sebudaca is a web proxy that allows you to access blocked websites and content by routing your requests through a different server. It helps you bypass restrictions and surf the web freely."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I unblock sites using sebudaca?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply head to an official site featuring sebudaca such as Holy Unblocker or Incognito!
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if sebudaca is blocked or not working?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "please email me @ sebuda.dev@null.net or contact me on Discord @pastins. I will try to fix it as soon as possible."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Floating Navbar -->
+    <nav class="floating-navbar">
+      <div class="navbar-brand">
+        <img
+          src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png"
+          alt="sebudaca logo"
+          class="navbar-logo"
+        />
+        <span class="navbar-title">sebudaca</span>
+      </div>
+      <div class="navbar-links">
+        <a href="index.html" class="nav-item active">Home</a>
+        <a href="apps.html" class="nav-item">Apps</a>
+        <a href="games.html" class="nav-item">Games</a>
+        <a href="#" class="nav-item">Movies</a>
+        <a href="credits.html" class="nav-item">Credits</a>
+        <a href="settings.html" class="nav-item" title="Settings">
+          <!-- Gear SVG icon -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            style="vertical-align: middle"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="3"
+              stroke="#eceff4"
+              stroke-width="2"
+            />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+              stroke="#eceff4"
+              stroke-width="2"
+              fill="none"
+            />
+          </svg>
+          <span style="margin-left: 4px">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div
+      title="sebudaca Logo"
+      class="flex-center logo-wrapper header-center"
+    >
+      <img class="logo" src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="Ultraviolet" />
+      <h1>sebudaca | net</h1>
+    </div>
+    <div class="flex-center center desc">
+      <p>
+        Search the web freely with sebudaca
+      </p>
+    </div>
+
+    <form id="uv-form" class="flex-center">
+      <input
+        id="uv-search-engine"
+        value="https://www.google.com/search?q=%s"
+        type="hidden"
+      />
+      <input id="uv-address" type="text" placeholder="Search the web freely" />
+    </form>
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
+    </div>
+    <div class="music-player">
+      <div class="music-controls">
+        <button id="prev-btn" title="Previous">
+          <!-- Prev SVG from flaticon.com -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#eceff4"><path d="M6 12l8.5 6V6z"/><rect x="4" y="6" width="2" height="12" rx="1" fill="#eceff4"/></svg>
+        </button>
+        <button id="play-btn" title="Play/Pause">
+          <!-- Play SVG from flaticon.com -->
+          <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="#eceff4"><path d="M8 5v14l11-7z"/></svg>
+          <!-- Pause SVG (hidden by default) -->
+          <svg id="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="#eceff4" style="display:none;"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+        </button>
+        <button id="next-btn" title="Next">
+          <!-- Next SVG from flaticon.com -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#eceff4"><path d="M18 12l-8.5 6V6z"/><rect x="18" y="6" width="2" height="12" rx="1" fill="#eceff4"/></svg>
+        </button>
+        <!-- Volume Control -->
+        <span class="volume-container" title="Volume">
+          <svg id="volume-icon" width="22" height="22" viewBox="0 0 24 24" fill="#eceff4" style="vertical-align:middle;"><path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z"/></svg>
+          <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="1" />
+        </span>
+        <span class="music-title" id="music-title">No song playing</span>
+      </div>
+      <div class="music-playlist" id="music-playlist">
+        <!-- Playlist will be rendered here -->
+      </div>
+      <audio id="audio-player" preload="auto"></audio>
+    </div>
+    <footer>
+      <a
+        title="sebuda-dev"
+        href="https://sebuda-dev.webflow.io"
+        >sebuda-dev</a
+      >
+      <a
+        title="guns.lol"
+        href="https://guns.lol/sebuda"
+        >guns.lol</a
+      >
+      <a
+        title="github"
+        href="https://github.com/sebudadev"
+        >GitHub</a
+      >
+      <a
+        title="License information"
+        href="credits.html"
+        style="margin-left: auto"
+        >Credits</a
+      >
+      <span>sebudaca &copy; net 2025</span>
+    </footer>
+    <script>
+      // filepath: c:\Users\steve\OneDrive\Documents\GitHub\Ultraviolet-App\public\index.html
+      // Simple playlist array (replace with your own mp3/ogg files and titles)
+      const playlist = [
+        { title: "Kodak Black - Love & War", src: "https://audio.jukehost.co.uk/Kzc6MFnCmYhH9a1yF2jOESHekM2tFOFS" },
+        { title: "Kodak_Black - Roll in Peace ", src: "https://audio.jukehost.co.uk/yiW43Xnbaaj52GUemT7d5Ohp3AHsUjN5" },
+      ];
+
+      const audio = document.getElementById('audio-player');
+      const playBtn = document.getElementById('play-btn');
+      const playIcon = document.getElementById('play-icon');
+      const pauseIcon = document.getElementById('pause-icon');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const musicTitle = document.getElementById('music-title');
+      const playlistDiv = document.getElementById('music-playlist');
+      const volumeSlider = document.getElementById('volume-slider');
+
+      let currentTrack = 0;
+      let isPlaying = false;
+
+      function loadTrack(index) {
+        audio.src = playlist[index].src;
+        musicTitle.textContent = playlist[index].title;
+        document.querySelectorAll('.playlist-item').forEach((el, i) => {
+          el.classList.toggle('active', i === index);
+        });
+      }
+
+      function playPause() {
+        if (audio.paused) {
+          audio.play();
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = '';
+          isPlaying = true;
+        } else {
+          audio.pause();
+          playIcon.style.display = '';
+          pauseIcon.style.display = 'none';
+          isPlaying = false;
+        }
+      }
+
+      function playTrack(index) {
+        currentTrack = index;
+        loadTrack(currentTrack);
+        audio.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+        isPlaying = true;
+      }
+
+      function nextTrack() {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        playTrack(currentTrack);
+      }
+
+      function prevTrack() {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        playTrack(currentTrack);
+      }
+
+      // Render playlist
+      playlistDiv.innerHTML = '';
+      playlist.forEach((track, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'playlist-item' + (i === 0 ? ' active' : '');
+        btn.textContent = track.title;
+        btn.onclick = () => playTrack(i);
+        playlistDiv.appendChild(btn);
+      });
+
+      // Initial load
+      loadTrack(currentTrack);
+
+      // Event listeners
+      playBtn.onclick = playPause;
+      nextBtn.onclick = nextTrack;
+      prevBtn.onclick = prevTrack;
+      audio.onended = nextTrack;
+
+      // Volume control
+      volumeSlider.oninput = (e) => {
+        audio.volume = e.target.value;
+      };
+    </script>
+  </body>
+</html>

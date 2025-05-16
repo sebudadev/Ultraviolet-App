@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sebudaca | Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body {
+      background: #23242a;
+      color: #eceff4;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .settings-container {
+      max-width: 540px;
+      margin: 120px auto 0 auto;
+      background: rgba(40,44,52,0.97);
+      border-radius: 1.5em;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      padding: 2em 2.5em;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5em;
+      font-size: 2em;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .setting-group {
+      margin-bottom: 2em;
+    }
+    .setting-label {
+      font-weight: 600;
+      margin-bottom: 0.5em;
+      display: block;
+    }
+    .setting-desc {
+      color: #bfc9db;
+      font-size: 0.98em;
+      margin-bottom: 0.7em;
+    }
+    .setting-actions {
+      margin-top: 0.7em;
+    }
+    .input-short {
+      width: 80px;
+      padding: 0.4em 0.7em;
+      border-radius: 0.7em;
+      border: none;
+      background: #434c5e;
+      color: #eceff4;
+      font-size: 1em;
+      margin-right: 0.5em;
+    }
+    .btn {
+      background: #5e81ac;
+      color: #fff;
+      border: none;
+      border-radius: 0.7em;
+      padding: 0.5em 1.2em;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn:hover {
+      background: #81a1c1;
+    }
+    .proxy-list {
+      background: #2e3440;
+      border-radius: 0.7em;
+      padding: 1em;
+      margin-top: 0.5em;
+      font-size: 0.98em;
+      color: #bfc9db;
+    }
+    .navbar-title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.15em;
+      letter-spacing: 0.03em;
+    }
+    .floating-navbar {
+      position: fixed;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(40, 44, 52, 0.97);
+      border-radius: 2em;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      padding: 0.5em 2em;
+      display: flex;
+      align-items: center;
+      gap: 2em;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      width: max-content;
+      min-width: 340px;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      margin-right: 1.5em;
+    }
+    .navbar-logo {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #2e3440;
+    }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-buttons li {
+      display: flex;
+      align-items: center;
+    }
+    .nav-buttons a {
+      color: #eceff4;
+      text-decoration: none;
+      padding: 0.4em 0.7em;
+      border-radius: 1em;
+      transition: background 0.15s;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+    }
+    .nav-buttons a:hover, .nav-buttons a.active {
+      background: #5e81ac;
+    }
+    .nav-buttons a.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="floating-navbar">
+    <div class="navbar-brand">
+      <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="navbar-logo" />
+      <span class="navbar-title">sebudaca</span>
+    </div>
+    <ul class="nav-buttons">
+      <li><a href="index.html" title="Home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12l9-9 9 9" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21V9h6v12" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="apps.html" title="Apps"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/></svg></a></li>
+      <li><a href="settings.html" title="Settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#eceff4" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#eceff4" stroke-width="2" fill="none"/></svg></a></li>
+    </ul>
+  </nav>
+  <div class="settings-container">
+    <h1>Settings</h1>
+    <div class="setting-group">
+      <span class="setting-label">Panic Key</span>
+      <div class="setting-desc">Set a key to instantly hide this site (opens about:blank in the same tab).</div>
+      <div class="setting-actions">
+        <input type="text" id="panicKey" class="input-short" maxlength="1" placeholder="Key" autocomplete="off">
+        <button class="btn" onclick="setPanicKey()">Set</button>
+        <span id="panicKeyStatus" style="margin-left:1em;color:#a3be8c;"></span>
+      </div>
+    </div>
+    <div class="setting-group">
+      <span class="setting-label">about:blank Cloak</span>
+      <div class="setting-desc">Open this site in a disguised about:blank tab (URL will show about:blank, but your site will be loaded in a new tab).</div>
+      <div class="setting-actions">
+        <button class="btn" onclick="openAboutBlank()">Open in about:blank</button>
+      </div>
+    </div>
+    <div class="setting-group">
+      <span class="setting-label">Proxy Features</span>
+      <div class="setting-desc">Ultraviolet Proxy is enabled. You can change the proxy prefix below (advanced users):</div>
+      <div class="setting-actions">
+        <input type="text" id="proxyPrefix" class="input-short" placeholder="/service/" autocomplete="off">
+        <button class="btn" onclick="setProxyPrefix()">Set Prefix</button>
+        <span id="proxyPrefixStatus" style="margin-left:1em;color:#a3be8c;"></span>
+      </div>
+      <div class="proxy-list">
+        <b>Current Prefix:</b> <span id="currentPrefix"></span><br>
+        <b>Bare Server:</b> <span id="bareServer"></span>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Panic Key logic
+    function setPanicKey() {
+      const key = document.getElementById('panicKey').value.trim().toLowerCase();
+      if (!key) return;
+      localStorage.setItem('panicKey', key);
+      document.getElementById('panicKeyStatus').textContent = `Set to "${key.toUpperCase()}"`;
+    }
+    document.addEventListener('keydown', function(e) {
+      const panicKey = localStorage.getItem('panicKey');
+      if (panicKey && e.key.toLowerCase() === panicKey) {
+        // Open about:blank in the same tab
+        window.open('about:blank', '_self');
+      }
+    });
+
+    // about:blank cloak logic
+    function openAboutBlank() {
+      const win = window.open('about:blank', '_blank');
+      if (win) {
+        const iframe = win.document.createElement('iframe');
+        iframe.style.position = 'fixed';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.width = '100vw';
+        iframe.style.height = '100vh';
+        iframe.style.border = 'none';
+        iframe.style.margin = '0';
+        iframe.style.padding = '0';
+        iframe.style.zIndex = '9999';
+        iframe.src = window.location.href;
+        win.document.body.style.margin = '0';
+        win.document.body.style.padding = '0';
+        win.document.body.appendChild(iframe);
+        win.document.title = "about:blank";
+      } else {
+        alert("Popup blocked! Please allow popups for this site.");
+      }
+    }
+
+    // Proxy prefix logic
+    function setProxyPrefix() {
+      const prefix = document.getElementById('proxyPrefix').value.trim();
+      if (prefix) {
+        localStorage.setItem('uvPrefix', prefix);
+        document.getElementById('proxyPrefixStatus').textContent = `Prefix set to "${prefix}"`;
+        updateProxyInfo();
+      }
+    }
+    function updateProxyInfo() {
+      const prefix = localStorage.getItem('uvPrefix') || (window.__uv$config && window.__uv$config.prefix) || '/service/';
+      document.getElementById('currentPrefix').textContent = prefix;
+      document.getElementById('bareServer').textContent = (window.__uv$config && window.__uv$config.bare) || '/bare/';
+    }
+    updateProxyInfo();
+  </script>
+</body>
+</html>

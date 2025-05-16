@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>sebudaca | Apps</title>
+    <link rel="stylesheet" href="index.css" />
+    <style>
+      .apps-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+        justify-content: center;
+        margin: 3em auto;
+        max-width: 900px;
+      }
+      .app-card {
+        background: rgba(40, 44, 52, 0.97);
+        border-radius: 1.2em;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+        padding: 1.5em 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 180px;
+        cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.15s;
+        border: 1px solid #4c566a;
+        text-align: center;
+      }
+      .app-card:hover {
+        transform: translateY(-6px) scale(1.04);
+        box-shadow: 0 6px 24px rgba(94,129,172,0.18);
+        background: #434c5e;
+      }
+      .app-card img {
+        width: 64px;
+        height: 64px;
+        border-radius: 1em;
+        margin-bottom: 1em;
+        background: #fff;
+        object-fit: contain;
+      }
+      .app-card-title {
+        color: #eceff4;
+        font-size: 1.1em;
+        font-weight: 600;
+        margin-bottom: 0.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="floating-navbar">
+      <div class="navbar-brand">
+        <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="navbar-logo" />
+        <span class="navbar-title">sebudaca</span>
+      </div>
+      <div class="navbar-links">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="apps.html" class="nav-item active">Apps</a>
+        <a href="games.html" class="nav-item">Games</a>
+        <a href="#" class="nav-item">Movies</a>
+        <a href="credits.html" class="nav-item">Credits</a>
+        <a href="settings.html" class="nav-item" title="Settings">
+          <!-- Gear SVG icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+            <circle cx="12" cy="12" r="3" stroke="#eceff4" stroke-width="2"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#eceff4" stroke-width="2" fill="none"/>
+          </svg>
+          <span style="margin-left:4px;">Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="logo-wrapper header-center" style="margin-top: 90px;">
+      <h1>Apps</h1>
+      <p style="color: #bfc9db; font-size: 1.1em; margin-top: 0.5em;">
+        Click an app to visit its website.
+      </p>
+    </div>
+
+    <div class="apps-container">
+      <div class="app-card" onclick="window.location.href='search.html?site=duckduckgo'">
+        <img src="https://duckduckgo.com/assets/logo_homepage.normal.v108.svg" alt="DuckDuckGo Logo" />
+        <div class="app-card-title">DuckDuckGo</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=wikipedia'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png" alt="Wikipedia Logo" />
+        <div class="app-card-title">Wikipedia</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=spotify'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify Logo" />
+        <div class="app-card-title">Spotify</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=tiktok'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/TikTok_logo.svg" alt="TikTok Logo" />
+        <div class="app-card-title">TikTok</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=geforce'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Nvidia_logo.svg" alt="GeForce Now Logo" />
+        <div class="app-card-title">GeForce Now</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=youtube'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube Logo" />
+        <div class="app-card-title">YouTube</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=google'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo" />
+        <div class="app-card-title">Google</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=github'">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" />
+        <div class="app-card-title">GitHub</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=discord'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg" alt="Discord Logo" />
+        <div class="app-card-title">Discord</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=reddit'">
+        <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Reddit_logo_and_wordmark.svg" alt="Reddit Logo" />
+        <div class="app-card-title">Reddit</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=twitch'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Twitch_Glitch_Logo_Purple.svg" alt="Twitch Logo" />
+        <div class="app-card-title">Twitch</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=x'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023.svg" alt="X Logo" />
+        <div class="app-card-title">X (Twitter)</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=steam'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam Logo" />
+        <div class="app-card-title">Steam</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=facebook'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo" />
+        <div class="app-card-title">Facebook</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=instagram'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" />
+        <div class="app-card-title">Instagram</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=pinterest'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" alt="Pinterest Logo" />
+        <div class="app-card-title">Pinterest</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=linkedin'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo" />
+        <div class="app-card-title">LinkedIn</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=gmail'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Gmail Logo" />
+        <div class="app-card-title">Gmail</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=outlook'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Microsoft_Office_Outlook_%282018–present%29.svg" alt="Outlook Logo" />
+        <div class="app-card-title">Outlook</div>
+      </div>
+      <div class="app-card" onclick="window.location.href='search.html?site=amazon'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo" />
+        <div class="app-card-title">Amazon</div>
+      </div>
+    </div>
+  </body>
+</html>

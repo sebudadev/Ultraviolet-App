@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>sebudaca | Search</title>
+    <link rel="stylesheet" href="index.css" />
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #222;
+      }
+      body {
+        min-height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+      .floating-navbar {
+        position: fixed;
+        top: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(40, 44, 52, 0.97);
+        border-radius: 2em;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+        padding: 0.5em 2em;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        z-index: 1000;
+        backdrop-filter: blur(8px);
+        width: max-content;
+        min-width: 340px;
+      }
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+        margin-right: 1.5em;
+      }
+      .navbar-logo {
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #2e3440;
+      }
+      .navbar-title {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.15em;
+        letter-spacing: 0.03em;
+      }
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-buttons li {
+        display: flex;
+        align-items: center;
+      }
+      .nav-buttons a {
+        color: #eceff4;
+        text-decoration: none;
+        padding: 0.4em 0.7em;
+        border-radius: 1em;
+        transition: background 0.15s;
+        font-size: 1.1em;
+        display: flex;
+        align-items: center;
+      }
+      .nav-buttons a:hover, .nav-buttons a.active {
+        background: #5e81ac;
+      }
+      .nav-buttons a.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .small-searchbar {
+        display: flex;
+        align-items: center;
+        background: #434c5e;
+        border-radius: 1.2em;
+        padding: 0.2em 0.7em;
+        min-width: 220px;
+        max-width: 320px;
+        margin: 0 0.5em;
+        position: relative;
+      }
+      .small-searchbar input {
+        background: transparent;
+        border: none;
+        color: #eceff4;
+        font-size: 1em;
+        width: 100%;
+        outline: none;
+        padding-left: 1.7em;
+      }
+      .small-searchbar svg {
+        position: absolute;
+        left: 0.7em;
+        color: #bfc9db;
+        font-size: 1em;
+        width: 1em;
+        height: 1em;
+      }
+      .shortcut-indicator-2 {
+        font-size: 0.8em;
+        color: #bfc9db;
+        margin-left: 0.5em;
+        white-space: nowrap;
+      }
+      .iframe-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        background: #222;
+      }
+      #cool-iframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        background: #222;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="floating-navbar">
+      <div class="navbar-brand">
+        <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="navbar-logo" />
+        <span class="navbar-title">sebudaca</span>
+      </div>
+      <ul class="nav-buttons">
+        <li>
+          <a id="backIcon" href="#" class="disabled" title="Back">
+            <!-- Back SVG (Flaticon style) -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <a id="refreshIcon" href="#" title="Refresh">
+            <!-- Refresh SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93 4.93a10 10 0 1 1-1.41 1.41" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="23 4 23 10 17 10" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <a id="forwardIcon" href="#" class="disabled" title="Forward">
+            <!-- Forward SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <a id="fullscreenIcon" href="#" title="Fullscreen">
+            <!-- Fullscreen SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-16h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <div class="small-searchbar" style="position: relative;">
+            <!-- Lock SVG -->
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17 11V7a5 5 0 0 0-10 0v4" stroke="#bfc9db" stroke-width="2" fill="none"/><rect x="5" y="11" width="14" height="10" rx="2" stroke="#bfc9db" stroke-width="2" fill="none"/></svg>
+            <input class="waves" type="text" id="searchInputt" placeholder="Search for a query or enter a URL..." autocomplete="off" style="padding-left: 40px;">
+            <span class="shortcut-indicator-2">Ctrl + S</span>
+          </div>
+        </li>
+        <li>
+          <a href="index.html" title="Home">
+            <!-- Home SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12l9-9 9 9" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21V9h6v12" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="games.html" title="Games">
+            <!-- Gamepad SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="6" stroke="#eceff4" stroke-width="2"/><circle cx="8" cy="12" r="1" fill="#eceff4"/><circle cx="16" cy="12" r="1" fill="#eceff4"/><path d="M12 8v8" stroke="#eceff4" stroke-width="2"/><path d="M8 12h8" stroke="#eceff4" stroke-width="2"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="apps.html" title="Apps">
+            <!-- Grid SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/></svg>
+          </a>
+        </li>
+        <li>
+          <a id="erudaIcon" href="#" title="Dev Tools">
+            <!-- Code SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polyline points="16 18 22 12 16 6" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="8 6 2 12 8 18" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="iframe-container">
+      <iframe id="cool-iframe"></iframe>
+    </div>
+    <form id="uv-form" autocomplete="off">
+      <input id="uv-address" type="text" placeholder="Search or enter URL..." autocomplete="off" />
+      <button type="submit" style="display:none">Go</button>
+    </form>
+    <p id="uv-error"></p>
+    <pre id="uv-error-code"></pre>
+    <!-- Ultraviolet scripts first -->
+    <script src="uv.bundle.js"></script>
+    <script src="uv.client.js"></script>
+    <script src="uv.config.js"></script>
+    <script src="search.js"></script>
+    <script src="index.js"></script>
+    <!-- Then your inline script above -->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle ?site= param for app shortcuts
+  const params = new URLSearchParams(window.location.search);
+  const site = params.get('site');
+  let url = '';
+  switch (site) {
+    case 'duckduckgo': url = 'https://duckduckgo.com'; break;
+    case 'wikipedia': url = 'https://www.wikipedia.org'; break;
+    case 'spotify': url = 'https://open.spotify.com'; break;
+    case 'tiktok': url = 'https://www.tiktok.com'; break;
+    case 'geforce': url = 'https://play.geforcenow.com'; break;
+    case 'youtube': url = 'https://www.youtube.com'; break;
+    case 'google': url = 'https://www.google.com'; break;
+    case 'github': url = 'https://github.com'; break;
+    case 'discord': url = 'https://discord.com/app'; break;
+    case 'reddit': url = 'https://www.reddit.com'; break;
+    case 'twitch': url = 'https://www.twitch.tv'; break;
+    case 'x': url = 'https://x.com'; break;
+    case 'steam': url = 'https://store.steampowered.com'; break;
+    case 'facebook': url = 'https://www.facebook.com'; break;
+    case 'instagram': url = 'https://www.instagram.com'; break;
+    case 'pinterest': url = 'https://www.pinterest.com'; break;
+    case 'linkedin': url = 'https://www.linkedin.com'; break;
+    case 'gmail': url = 'https://mail.google.com'; break;
+    case 'outlook': url = 'https://outlook.live.com'; break;
+    case 'amazon': url = 'https://www.amazon.com'; break;
+    default: url = '';
+  }
+  const iframe = document.getElementById('cool-iframe');
+  const searchInput = document.getElementById('searchInputt');
+
+  // Helper: encode and set iframe src via UV
+  function goTo(url) {
+    if (!window.__uv$config || typeof window.__uv$config.encodeUrl !== 'function') return;
+    iframe.src = window.__uv$config.prefix + window.__uv$config.encodeUrl(url);
+    if (url) {
+      history.pushState(null, '', '?site=' + site + '&url=' + encodeURIComponent(url));
+    } else {
+      history.pushState(null, '', window.location.pathname);
+    }
+  }
+
+  // Initial URL handling
+  if (url) {
+    goTo(url);
+  }
+
+  // Search input handling
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const query = searchInput.value.trim();
+      if (query) {
+        if (query.startsWith('http://') || query.startsWith('https://')) {
+          goTo(query);
+        } else {
+          goTo('https://www.google.com/search?q=' + encodeURIComponent(query));
+        }
+      }
+    }
+  });
+
+  // Back and forward button handling
+  let currentUrl = '';
+  window.addEventListener('message', function(event) {
+    if (event.origin !== window.location.origin) return;
+    const { type, url } = event.data;
+    if (type === 'uv.navigation') {
+      if (url) {
+        currentUrl = url;
+        searchInput.value = '';
+      }
+    }
+  });
+
+  document.getElementById('backIcon').addEventListener('click', function() {
+    iframe.contentWindow.postMessage({ type: 'uv.back' }, '*');
+  });
+
+  document.getElementById('forwardIcon').addEventListener('click', function() {
+    iframe.contentWindow.postMessage({ type: 'uv.forward' }, '*');
+  });
+
+  document.getElementById('refreshIcon').addEventListener('click', function() {
+    iframe.contentWindow.postMessage({ type: 'uv.refresh' }, '*');
+  });
+
+  document.getElementById('fullscreenIcon').addEventListener('click', function() {
+    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+    if (isFullscreen) {
+      document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen();
+    } else {
+      iframe.requestFullscreen ? iframe.requestFullscreen() : iframe.webkitRequestFullscreen();
+    }
+  });
+
+  // Dev tools (Eruda) integration
+  document.getElementById('erudaIcon').addEventListener('click', function() {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/eruda';
+    script.onload = function() {
+      eruda.init();
+      const style = document.createElement('style');
+      style.textContent = 'eruda { z-index: 9999 !important; }';
+      document.head.appendChild(style);
+    };
+    document.body.appendChild(script);
+  });
+});
+    </script>
+  </body>
+</html>
