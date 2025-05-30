@@ -22,7 +22,7 @@ const errorCode = document.getElementById("uv-error-code");
 
 async function registerSW() {
   if (!navigator.serviceWorker.controller) {
-    await navigator.serviceWorker.register('./sw.js', {
+    await navigator.serviceWorker.register('/uv/uv.sw.js', {
       scope: __uv$config.prefix,
     });
   }
@@ -64,4 +64,18 @@ address.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
   }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('uv-form');
+  const address = document.getElementById('uv-address');
+  if (!form || !address) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const val = address.value.trim();
+    if (!val) return;
+    // Redirect to search.html with the url as a query param
+    window.location.href = `search.html?url=${encodeURIComponent(val)}`;
+  });
 });

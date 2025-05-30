@@ -28,6 +28,7 @@
     <script src="register-sw.js" defer></script>
     <script src="search.js" defer></script>
     <script src="index.js" defer></script>
+    <script src="intro-anim.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -63,102 +64,108 @@
   </head>
 
   <body>
-    <!-- Floating Navbar -->
-    <nav class="floating-navbar">
-      <div class="navbar-brand">
-        <img
-          src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png"
-          alt="sebudaca logo"
-          class="navbar-logo"
+    <div class="background-container">
+      <div class="wave-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+      </div>
+      <!-- Light beams (optional, 6 beams for effect) -->
+      <div class="light-beam" style="left: 10%; animation-delay: 0s;"></div>
+      <div class="light-beam" style="left: 30%; animation-delay: 2s;"></div>
+      <div class="light-beam" style="left: 50%; animation-delay: 4s;"></div>
+      <div class="light-beam" style="left: 70%; animation-delay: 1s;"></div>
+      <div class="light-beam" style="left: 85%; animation-delay: 3s;"></div>
+      <div class="light-beam" style="left: 95%; animation-delay: 5s;"></div>
+      <!-- Particles (optional, 20 for subtle effect) -->
+      <script>
+        // Generate 20 floating particles
+        for (let i = 0; i < 20; i++) {
+          const p = document.createElement('div');
+          p.className = 'particle';
+          p.style.width = p.style.height = (Math.random() * 8 + 4) + 'px';
+          p.style.left = (Math.random() * 100) + '%';
+          p.style.top = (Math.random() * 100) + '%';
+          p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+          p.style.animationDelay = (-Math.random() * 8) + 's';
+          document.currentScript.parentElement.appendChild(p);
+        }
+      </script>
+    </div>
+
+  <div class="relative flex flex-col h-[100vh] items-center justify-center bg-black transition-bg">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="god-rays absolute -inset-[10px] opacity-50"></div>
+    </div>
+  </div>
+  
+    <!-- Main Navbar (bigger, centered, with brand) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <div class="navbar main-navbar">
+      <div class="main-navbar-title">
+        <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="main-navbar-logo" />
+        <span>sebudaca</span>
+      </div>
+      <ul class="nav-buttons">
+        <li><a href="index.html" class="active" title="Home"><i class="fa-solid fa-house"></i></a></li>
+        <li><a href="games.html" title="Games"><i class="fa-solid fa-gamepad"></i></a></li>
+        <li><a href="apps.html" title="Apps"><i class="fa-solid fa-th"></i></a></li>
+        <li><a href="settings.html" title="Settings"><i class="fa-solid fa-gear"></i></a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="logo-wrapper header-center">
+        <img class="logo" src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="Ultraviolet" />
+        <h1>sebudaca | net</h1>
+      </div>
+      <div class="desc">
+        <p>
+          Search the web freely with sebudaca
+        </p>
+      </div>
+
+      <form id="uv-form" class="flex-center">
+        <input
+          id="uv-search-engine"
+          value="https://www.duckduckgo.com/search?q=%s"
+          type="hidden"
         />
-        <span class="navbar-title">sebudaca</span>
+        <input id="uv-address" type="text" placeholder="Search the web freely" />
+      </form>
+      <div class="desc left-margin">
+        <p id="uv-error"></p>
+        <pre id="uv-error-code"></pre>
       </div>
-      <div class="navbar-links">
-        <a href="index.html" class="nav-item active">Home</a>
-        <a href="apps.html" class="nav-item">Apps</a>
-        <a href="games.html" class="nav-item">Games</a>
-        <a href="#" class="nav-item">Movies</a>
-        <a href="credits.html" class="nav-item">Credits</a>
-        <a href="settings.html" class="nav-item" title="Settings">
-          <!-- Gear SVG icon -->
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            style="vertical-align: middle"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="3"
-              stroke="#eceff4"
-              stroke-width="2"
-            />
-            <path
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-              stroke="#eceff4"
-              stroke-width="2"
-              fill="none"
-            />
-          </svg>
-          <span style="margin-left: 4px">Settings</span>
-        </a>
+      <div class="music-player">
+        <div class="music-controls">
+          <button id="prev-btn" title="Previous">
+            <!-- Prev SVG from flaticon.com -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#eceff4"><path d="M6 12l8.5 6V6z"/><rect x="4" y="6" width="2" height="12" rx="1" fill="#eceff4"/></svg>
+          </button>
+          <button id="play-btn" title="Play/Pause">
+            <!-- Play SVG from flaticon.com -->
+            <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="#eceff4"><path d="M8 5v14l11-7z"/></svg>
+            <!-- Pause SVG (hidden by default) -->
+            <svg id="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="#eceff4" style="display:none;"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+          </button>
+          <button id="next-btn" title="Next">
+            <!-- Next SVG from flaticon.com -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#eceff4"><path d="M18 12l-8.5 6V6z"/><rect x="18" y="6" width="2" height="12" rx="1" fill="#eceff4"/></svg>
+          </button>
+          <!-- Volume Control -->
+          <span class="volume-container" title="Volume">
+            <svg id="volume-icon" width="22" height="22" viewBox="0 0 24 24" fill="#eceff4" style="vertical-align:middle;"><path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z"/></svg>
+            <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="1" />
+          </span>
+          <span class="music-title" id="music-title">No song playing</span>
+        </div>
+        <div class="music-playlist" id="music-playlist">
+          <!-- Playlist will be rendered here -->
+        </div>
+        <audio id="audio-player" preload="auto"></audio>
       </div>
-    </nav>
-
-    <div
-      title="sebudaca Logo"
-      class="flex-center logo-wrapper header-center"
-    >
-      <img class="logo" src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="Ultraviolet" />
-      <h1>sebudaca | net</h1>
-    </div>
-    <div class="flex-center center desc">
-      <p>
-        Search the web freely with sebudaca
-      </p>
-    </div>
-
-    <form id="uv-form" class="flex-center">
-      <input
-        id="uv-search-engine"
-        value="https://www.google.com/search?q=%s"
-        type="hidden"
-      />
-      <input id="uv-address" type="text" placeholder="Search the web freely" />
-    </form>
-    <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
-    </div>
-    <div class="music-player">
-      <div class="music-controls">
-        <button id="prev-btn" title="Previous">
-          <!-- Prev SVG from flaticon.com -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#eceff4"><path d="M6 12l8.5 6V6z"/><rect x="4" y="6" width="2" height="12" rx="1" fill="#eceff4"/></svg>
-        </button>
-        <button id="play-btn" title="Play/Pause">
-          <!-- Play SVG from flaticon.com -->
-          <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="#eceff4"><path d="M8 5v14l11-7z"/></svg>
-          <!-- Pause SVG (hidden by default) -->
-          <svg id="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="#eceff4" style="display:none;"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-        </button>
-        <button id="next-btn" title="Next">
-          <!-- Next SVG from flaticon.com -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#eceff4"><path d="M18 12l-8.5 6V6z"/><rect x="18" y="6" width="2" height="12" rx="1" fill="#eceff4"/></svg>
-        </button>
-        <!-- Volume Control -->
-        <span class="volume-container" title="Volume">
-          <svg id="volume-icon" width="22" height="22" viewBox="0 0 24 24" fill="#eceff4" style="vertical-align:middle;"><path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z"/></svg>
-          <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="1" />
-        </span>
-        <span class="music-title" id="music-title">No song playing</span>
-      </div>
-      <div class="music-playlist" id="music-playlist">
-        <!-- Playlist will be rendered here -->
-      </div>
-      <audio id="audio-player" preload="auto"></audio>
     </div>
     <footer>
       <a

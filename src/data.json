@@ -1,0 +1,24 @@
+{
+  "chars": ["&#173;", "&#8203;", "&shy;"],
+  "keywords": [
+    "proxy",
+    "unblock",
+    "games",
+    "discord",
+    "youtube",
+    "github",
+    "privacy",
+    "school",
+    "bypass"
+  ],
+  "content": [
+    "sebudaca is a fast web proxy to unblock sites like YouTube and Discord at school.",
+    "Play unblocked games and access your favorite sites with privacy.",
+    "GitHub hosts the Ultraviolet source code and documentation.",
+    "Bypass restrictions and enjoy the open web."
+  ],
+  "splash": [
+    "Welcome to sebudaca! Search for sites, games, or info above."
+  ],
+  "version": ["6.4.5"]
+}

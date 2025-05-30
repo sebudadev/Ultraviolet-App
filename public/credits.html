@@ -8,30 +8,23 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
     <link rel="shortcut icon" content="favicon.ico" />
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   </head>
   <body>
     <!-- Floating Navbar -->
-    <nav class="floating-navbar">
-      <div class="navbar-brand">
-        <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="navbar-logo" />
-        <span class="navbar-title">sebudaca</span>
-      </div>
-      <div class="navbar-links">
-        <a href="index.html" class="nav-item">Home</a>
-        <a href="apps.html" class="nav-item">Apps</a>
-        <a href="games.html" class="nav-item">Games</a>
-        <a href="#" class="nav-item">Movies</a>
-          <a href="index.html" class="nav-item active">Credits</a>
-          <a href="settings.html" class="nav-item" title="Settings">
-  <!-- Gear SVG icon -->
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
-    <circle cx="12" cy="12" r="3" stroke="#eceff4" stroke-width="2"/>
-    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#eceff4" stroke-width="2" fill="none"/>
-  </svg>
-  <span style="margin-left:4px;">Settings</span>
-</a>
-      </div>
-    </nav>
+    <div class="navbar main-navbar">
+  <div class="main-navbar-title">
+    <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="main-navbar-logo" />
+    <span>sebudaca</span>
+  </div>
+  <ul class="nav-buttons">
+    <li><a href="index.html" title="Home"><i class="fa-solid fa-house"></i></a></li>
+    <li><a href="games.html" title="Games"><i class="fa-solid fa-gamepad"></i></a></li>
+    <li><a href="apps.html" title="Apps"><i class="fa-solid fa-th"></i></a></li>
+    <li><a href="credits.html" class="active" title="Credits"><i class="fa-solid fa-certificate"></i></a></li>
+    <li><a href="settings.html" title="Settings"><i class="fa-solid fa-gear"></i></a></li>
+  </ul>
+</div>
 
     <div class="logo-wrapper header-center" style="margin-top: 90px;">
       <h1>Credits & Licenses</h1>
@@ -112,5 +105,6 @@ See <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">full li
       <a href="credits.html" style="margin-left: auto">Credits</a>
       <span>sebudaca &copy; net 2025</span>
     </footer>
+    <script src="intro-anim.js"></script>
   </body>
 </html>

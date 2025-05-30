@@ -86,8 +86,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  margin-bottom: 1.1em;
 }
 
 footer {
@@ -122,24 +121,22 @@ footer a:hover {
 }
 
 #uv-address {
-  background: none;
-  font-family: inherit;
-  padding: 0px 17px;
-  height: 48px;
-  border: 1px solid rgb(255, 255, 255, 0.2);
-  color: var(--text-color);
-  border-radius: 3px;
-  outline: none;
   width: 350px;
-  margin-top: 5px;
-  border-radius: 50px;
-  color: #fff;
-  transition: border-radius 0.1s;
+  max-width: 90vw;
+  padding: 0.7em 1.2em;
+  border-radius: 20px;
+  border: 1px solid #ffffff1a;
+  background: #222c;
+  color: #eceff4;
+  font-size: 1.1em;
+  outline: none;
+  margin-bottom: 0.5em;
+  transition: border 0.2s;
+  text-align: center;
 }
 
 #uv-address:focus {
-  border: 1px solid rgba(253, 253, 253, 0.514);
-  border-radius: 6px;
+  border: 1px solid #5e81ac;
 }
 
 .credit {
@@ -308,7 +305,8 @@ footer a:hover {
 .music-controls {
   display: flex;
   align-items: center;
-  gap: 1.2em;
+  justify-content: center;
+  gap: 1em;
 }
 
 .music-controls button {
@@ -326,9 +324,9 @@ footer a:hover {
 }
 
 .music-title {
+  margin-left: 1em;
   color: #eceff4;
   font-weight: 500;
-  margin-left: 1.2em;
   font-size: 1em;
   white-space: nowrap;
   overflow: hidden;
@@ -337,28 +335,26 @@ footer a:hover {
 }
 
 .music-playlist {
+  margin-top: 1em;
   display: flex;
-  gap: 0.7em;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0.3em;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
 }
 
-.music-playlist .playlist-item {
-  background: #434c5e;
+.playlist-item {
+  background: #232a3a;
   color: #eceff4;
-  border-radius: 1em;
-  padding: 0.3em 1em;
-  cursor: pointer;
-  font-size: 0.95em;
-  transition: background 0.15s;
   border: none;
-  outline: none;
+  border-radius: 8px;
+  padding: 0.5em 1.2em;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-.music-playlist .playlist-item.active,
-.music-playlist .playlist-item:hover {
-  background: #1966c5;
+.playlist-item.active,
+.playlist-item:hover {
+  background: #5e81ac;
   color: #fff;
 }
 
@@ -374,4 +370,170 @@ footer a:hover {
   accent-color: #00fcfc;
   vertical-align: middle;
   margin-left: 0.2em;
+}
+
+/* Main Navbar (smaller, compact, centered) */
+.main-navbar {
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #42424205;
+  backdrop-filter: blur(10px);
+  border: 1.5px solid #ffffff5b;
+  width: 670px;
+  max-width: 98vw;
+  border-radius: 25px;
+  align-items: center;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1001;
+  animation: fadeIn 0.3s ease;
+  padding: 0.5em 1.5em;
+  font-size: 1em;
+  box-shadow: 0 4px 24px 0 #96969622;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-navbar .nav-buttons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7em;
+  width: 100%;
+}
+
+.main-navbar .nav-buttons li {
+  display: flex;
+  align-items: center;
+}
+
+.main-navbar .nav-buttons a {
+  color: #eceff4;
+  text-decoration: none;
+  padding: 0.4em 1em;
+  border-radius: 1em;
+  transition: background 0.18s, color 0.18s, font-size 0.18s;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.main-navbar .nav-buttons a:hover,
+.main-navbar .nav-buttons a.active {
+  background: #5e81ac;
+  color: #fff;
+  font-size: 1.08em;
+}
+
+.main-navbar .nav-buttons a.active {
+  font-weight: 700;
+  box-shadow: 0 2px 12px 0 #38bdf8;
+}
+
+.main-navbar .nav-buttons a.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.main-navbar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-left: 0;
+  margin-right: 7em;
+  font-size: 1.08em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.03em;
+  user-select: none;
+}
+
+.main-navbar-logo {
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 0.5em;
+  vertical-align: middle;
+  margin-left: 0;
+  margin-right: 0.15em;
+  background: #00000000;
+  box-shadow: 0 2px 8px #2563eb33;
+}
+
+/* Move logo/title to the left of the navbar */
+.main-navbar .main-navbar-title {
+  order: -1;
+}
+
+@media (max-width: 800px) {
+  .main-navbar {
+    width: 99vw;
+    min-width: 0;
+    padding: 0.4em 0.3em;
+    font-size: 0.95em;
+  }
+  .main-navbar-title {
+    font-size: 0.95em;
+    margin-right: 1em;
+  }
+  .main-navbar-logo {
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* God Rays: faster, more visible, more dynamic like usewaves.site */
+.god-rays {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 750px;
+    --stripes: repeating-linear-gradient(100deg, #ffffffcc 0%, #ffffffcc 7%, transparent 10%, transparent 12%, #ffffffcc 16%);
+    --rays: repeating-linear-gradient(100deg, #ffffffe6 10%, #e6e6e6e6 15%, #ffffffe6 20%, #e6e6e6e6 25%, #ffffffe6 30%);
+    background-image: var(--stripes), var(--rays);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+    mask-image: radial-gradient(ellipse at 100% 0%, transparent 40%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 100% 0%, white 40%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.god-rays::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rays);
+    background-size: 200%, 100%;
+    animation: god-rays 40s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+}
+@keyframes god-rays {
+    0% {
+        background-position: 60% 50%, 40% 50%;
+    }
+    100% {
+        background-position: 0% 50%, 100% 50%;
+    }
+}
+
+/* Center the main content (search bar, logo, desc, music player) */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  margin-top: 120px; /* space for navbar */
+  text-align: center;
 }

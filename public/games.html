@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sebudaca | Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    /* Only keep game-specific and fullscreen overlay styles here! */
+    .main-content { padding-top: 6.5rem; }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 2rem 1rem;
+    }
+    .game-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px 0 rgba(30,58,138,0.10);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.18s, box-shadow 0.18s;
+      border: 1.5px solid rgba(255,255,255,0.10);
+      min-height: 420px;
+      cursor: pointer;
+      position: relative;
+    }
+    .game-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px 0 #38bdf8;
+      border-color: #38bdf8;
+    }
+    .game-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+      text-align: center;
+    }
+    .game-frame {
+      width: 320px;
+      height: 400px;
+      border: none;
+      border-radius: 1rem;
+      background: #222;
+      box-shadow: 0 2px 16px 0 rgba(30,58,138,0.10);
+      margin-bottom: 1rem;
+      pointer-events: none;
+    }
+    @media (max-width: 400px) {
+      .game-frame { width: 98vw; height: 60vw; }
+    }
+    .game-desc {
+      color: #e0e7ef;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      color: #cbd5e1;
+      padding: 2rem 0 1rem 0;
+      font-size: 1rem;
+      opacity: 0.8;
+      letter-spacing: 0.02em;
+    }
+    /* Fullscreen overlay */
+    .fullscreen-overlay {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(10,25,47,0.98);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.3s;
+    }
+    .fullscreen-overlay.active {
+      display: flex;
+    }
+    .fullscreen-content {
+      background: rgba(30,58,138,0.13);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px 0 #38bdf8;
+      padding: 2rem;
+      max-width: 90vw;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 100%;
+    }
+    .fullscreen-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+      text-align: center;
+    }
+    .fullscreen-frame {
+      width: 90vw;
+      max-width: 900px;
+      height: 70vh;
+      min-height: 350px;
+      border: none;
+      border-radius: 1rem;
+      background: #222;
+      box-shadow: 0 2px 16px 0 rgba(30,58,138,0.10);
+      margin-bottom: 1rem;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px 0 #38bdf8;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .close-btn:hover {
+      background: #1e40af;
+    }
+    /* Navbar overrides for floating-navbar */
+    .floating-navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100vw;
+      z-index: 100;
+      background: rgba(10,25,47,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(96, 165, 250, 0.18);
+      box-shadow: 0 2px 24px 0 rgba(30,58,138,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 2rem;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .navbar-logo {
+      width: 2.2rem;
+      height: 2.2rem;
+      vertical-align: middle;
+      border-radius: 0.5rem;
+    }
+    .navbar-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #2563eb;
+      user-select: none;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-item {
+      color: #e0e7ef;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 1.5rem;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .nav-item.active, .nav-item:hover {
+      background: linear-gradient(90deg, #2563eb, #a78bfa);
+      color: #fff;
+      box-shadow: 0 2px 16px 0 #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Navbar (centered by index.css) -->
+  <nav class="floating-navbar">
+    <div class="navbar-brand">
+      <img
+        src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png"
+        alt="sebudaca logo"
+        class="navbar-logo"
+      />
+      <span class="navbar-title">sebudaca</span>
+    </div>
+    <div class="navbar-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="apps.html" class="nav-item">Apps</a>
+      <a href="games.html" class="nav-item active">Games</a>
+      <a href="#" class="nav-item">Movies</a>
+      <a href="credits.html" class="nav-item">Credits</a>
+      <a href="settings.html" class="nav-item" title="Settings">
+        <!-- Gear SVG icon -->
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          style="vertical-align: middle"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+            stroke="#eceff4"
+            stroke-width="2"
+          />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+            stroke="#eceff4"
+            stroke-width="2"
+            fill="none"
+          />
+        </svg>
+        <span style="margin-left: 4px">Settings</span>
+      </a>
+    </div>
+  </nav>
+  <div class="main-content">
+    <h1>sebudaca's 50+ Playable Browser Games</h1>
+    <p style="text-align:center;">Enjoy a huge collection of classic and modern games, right in your browser! Click a game to play fullscreen.</p>
+    <div class="games-grid" id="gamesGrid">
+      <!-- Game cards will be injected here by JS -->
+    </div>
+  </div>
+  <!-- Fullscreen overlay -->
+  <div class="fullscreen-overlay" id="fullscreenOverlay">
+    <div class="fullscreen-content">
+      <button class="close-btn" id="closeFullscreen" title="Close">&times;</button>
+      <div class="fullscreen-title" id="fullscreenTitle"></div>
+      <iframe class="fullscreen-frame" id="fullscreenFrame" allowfullscreen></iframe>
+      <div class="game-desc" id="fullscreenDesc"></div>
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 sebudaca &mdash; Enjoy and have fun!
+  </footer>
+  <script>
+    // List of games (title, url, description)
+    const games = [
+      {title:"Tetris", url:"https://freetetris.org/game.php", desc:"Stack blocks and clear lines in this classic puzzle game."},
+      {title:"2048", url:"https://play2048.co/", desc:"Combine tiles to reach 2048. Simple, addictive, and fun!"},
+      {title:"Snake", url:"https://playsnake.org/", desc:"Eat the dots, grow your snake, and avoid crashing into yourself."},
+      {title:"Minesweeper", url:"https://minesweeperonline.com/", desc:"Uncover all the safe squares without detonating any mines!"},
+      {title:"Pacman", url:"https://www.freepacman.org/", desc:"Eat all the dots and avoid the ghosts in this arcade classic."},
+      {title:"Flappy Bird", url:"https://flappybird.io/", desc:"Tap to fly and dodge the pipes!"},
+      {title:"Breakout", url:"https://www.retrogames.cc/embed/41699-arkanoid-(japan).html", desc:"Bounce the ball and break all the bricks."},
+      {title:"Solitaire", url:"https://www.solitr.com/", desc:"Classic card game for solo fun."},
+      {title:"Sudoku", url:"https://sudoku.com/", desc:"Fill the grid with numbers 1-9 without repeating in rows, columns, or boxes."},
+      {title:"Chess", url:"https://www.chess.com/play/computer", desc:"Play chess against the computer or friends."},
+      {title:"Checkers", url:"https://www.gamesforthebrain.com/game/checkers/", desc:"Classic checkers game against the computer."},
+      {title:"Connect 4", url:"https://www.mathsisfun.com/games/connect4.html", desc:"Connect four discs in a row to win!"},
+      {title:"Pong", url:"https://ponggame.org/", desc:"The original table tennis arcade game."},
+      {title:"Space Invaders", url:"https://www.retrogames.cc/embed/41698-space-invaders.html", desc:"Defend Earth from waves of aliens!"},
+      {title:"Super Mario Bros", url:"https://supermario-game.com/", desc:"Jump and run through the Mushroom Kingdom!"},
+      {title:"Dino Game", url:"https://chromedino.com/", desc:"Jump over cacti and dodge birds in this endless runner."},
+      {title:"Hextris", url:"https://hextris.io/", desc:"A fast-paced puzzle game inspired by Tetris."},
+      {title:"Cookie Clicker", url:"https://orteil.dashnet.org/cookieclicker/", desc:"Click the cookie. Get more cookies. Upgrade!"},
+      {title:"GeoGuessr (Free)", url:"https://virtualvacation.us/guess", desc:"Guess the location from Google Street View."},
+      {title:"Wordle", url:"https://www.nytimes.com/games/wordle/index.html", desc:"Guess the 5-letter word in 6 tries."},
+      {title:"Slope", url:"https://slopegame.com/", desc:"Roll down the slope and avoid obstacles!"},
+      {title:"Agar.io", url:"https://agar.io/", desc:"Eat cells, grow bigger, and avoid being eaten!"},
+      {title:"Slither.io", url:"https://slither.io/", desc:"Eat orbs, grow your snake, and outlast others!"},
+      {title:"Paper.io", url:"https://paper-io.com/", desc:"Capture territory and outmaneuver your opponents."},
+      {title:"Crossy Road", url:"https://crossyroad.com/play/", desc:"Cross the road, dodge cars, and go as far as you can!"},
+      {title:"Cut the Rope", url:"https://cuttherope.ie/", desc:"Feed candy to Om Nom by cutting ropes in the right order."},
+      {title:"Fruit Ninja", url:"https://fruitninja.com/play/", desc:"Slice fruit, avoid bombs, and get a high score!"},
+      {title:"Doodle Jump", url:"https://doodlejump.io/", desc:"Jump as high as you can and avoid obstacles."},
+      {title:"Helix Jump", url:"https://helixjump.io/", desc:"Guide the ball down the helix tower!"},
+      {title:"Temple Run 2", url:"https://templerun2.co/", desc:"Run, jump, and slide to escape the temple!"},
+      {title:"Subway Surfers", url:"https://subwaysurfers.com/play/", desc:"Dash as fast as you can and dodge the trains!"},
+      {title:"Uno Online", url:"https://www.unoonline.com/", desc:"Play the classic card game Uno with others online."},
+      {title:"Backgammon", url:"https://www.247backgammon.org/", desc:"Classic board game of luck and strategy."},
+      {title:"Mahjong", url:"https://www.247mahjong.com/", desc:"Match tiles and clear the board."},
+      {title:"Yahtzee", url:"https://www.yahtzee.org/", desc:"Roll the dice and score big in this classic game."},
+      {title:"Scrabble", url:"https://www.pogo.com/games/scrabble", desc:"Build words and score points!"},
+      {title:"Hangman", url:"https://www.hangmanwords.com/play", desc:"Guess the word before the hangman is complete."},
+      {title:"Tic Tac Toe", url:"https://playtictactoe.org/", desc:"Classic Xs and Os game for two players."},
+      {title:"Battleship", url:"https://en.battleship-game.org/", desc:"Sink your opponent's ships before they sink yours!"},
+      {title:"Ludo", url:"https://www.ludo-king.com/", desc:"Race your tokens to the finish in this classic board game."},
+      {title:"Monopoly", url:"https://www.pogo.com/games/monopoly", desc:"Buy, sell, and trade your way to victory!"},
+      {title:"Pinball", url:"https://www.pinballonline.com/", desc:"Classic arcade pinball action!"},
+      {title:"Bubble Shooter", url:"https://www.bubbleshooter.net/", desc:"Match and pop bubbles to clear the board."},
+      {title:"Bejeweled", url:"https://www.besjeweled.com/", desc:"Match gems and rack up points!"},
+      {title:"Zuma", url:"https://www.zumaking.com/", desc:"Shoot balls to match colors and clear the chain."},
+      {title:"Super Hexagon", url:"https://superhexagon.com/play/", desc:"Fast-paced action and reflexes!"},
+      {title:"Line Rider", url:"https://linerider.com/play/", desc:"Draw lines and watch the sledder ride!"},
+      {title:"Fireboy & Watergirl", url:"https://www.crazygames.com/game/fireboy-and-watergirl-1-forest-temple", desc:"Co-op puzzle platformer for two players."},
+      {title:"Moto X3M", url:"https://www.crazygames.com/game/moto-x3m", desc:"Race your bike through challenging levels!"},
+      {title:"Stickman Hook", url:"https://stickmanhook.io/", desc:"Swing through levels as a stickman!"}
+    ];
+
+    // Render game cards
+    const grid = document.getElementById('gamesGrid');
+    games.forEach((game, i) => {
+      const card = document.createElement('div');
+      card.className = 'game-card';
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <div class="game-title">${game.title}</div>
+        <iframe class="game-frame" src="${game.url}" title="${game.title}" loading="lazy"></iframe>
+        <div class="game-desc">${game.desc}</div>
+      `;
+      card.addEventListener('click', () => openFullscreen(game));
+      card.addEventListener('keypress', e => { if(e.key === "Enter") openFullscreen(game); });
+      grid.appendChild(card);
+    });
+
+    // Fullscreen logic
+    const overlay = document.getElementById('fullscreenOverlay');
+    const closeBtn = document.getElementById('closeFullscreen');
+    const fsTitle = document.getElementById('fullscreenTitle');
+    const fsFrame = document.getElementById('fullscreenFrame');
+    const fsDesc = document.getElementById('fullscreenDesc');
+
+    function openFullscreen(game) {
+      fsTitle.textContent = game.title;
+      fsFrame.src = game.url;
+      fsDesc.textContent = game.desc;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeFullscreen() {
+      overlay.classList.remove('active');
+      fsFrame.src = '';
+      document.body.style.overflow = '';
+    }
+    closeBtn.addEventListener('click', closeFullscreen);
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeFullscreen();
+    });
+    document.addEventListener('keydown', e => {
+      if (overlay.classList.contains('active') && (e.key === "Escape" || e.key === "Esc")) closeFullscreen();
+    });
+  </script>
+  <script src="intro-anim.js"></script>
+</body>
+</html>

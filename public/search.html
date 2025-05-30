@@ -5,61 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>sebudaca | Search</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-      html, body {
-        height: 100%;
+      * {
         margin: 0;
         padding: 0;
-        background: #222;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
+
       body {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
         min-height: 100vh;
-        width: 100vw;
-        overflow: hidden;
+        color: white;
       }
-      .floating-navbar {
+
+      .home-navbar {
+        transform: translateX(-50%);
+        width: 670px;
+        top: 1%;
+        margin-bottom: -10px;
+        margin-left: 50%;
+        background-color: #08080894;
+        border: 1px solid #ffffff21;
+        height: 35px;
+        color: #818181;
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 1001;
+        backdrop-filter: blur(5px);
+        border-radius: 25px;
         position: fixed;
-        top: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+      }
+
+      .home-navbar .favicon {
+        width: 24px;
+        height: 24px;
+        margin-right: -10px;
+        vertical-align: middle;
+      }
+
+      .home-navbar a {
+        color: #7c7c7c;
+        text-decoration: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 300;
+        border-radius: 5px;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .home-navbar a:hover {
+        color: #bbbbbb;
+        font-size: 16px;
+      }
+
+      .home-navbar a:active {
+        font-size: 12px;
+      }
+
+      .home-navbar i {
+        color: #ffffff; 
+        margin-right: -15px;
+        margin-left: 115px;
+      }
+
+      .navbar {
+        top: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(40, 44, 52, 0.97);
-        border-radius: 2em;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-        padding: 0.5em 2em;
-        display: flex;
+        background-color: #1111119c;
+        backdrop-filter: blur(10px);
+        border: 1px solid #ffffff1a;
+        width: 900px;
+        max-width: 98vw;
+        display: block;
+        border-radius: 25px;
         align-items: center;
-        gap: 2em;
-        z-index: 1000;
-        backdrop-filter: blur(8px);
-        width: max-content;
-        min-width: 340px;
-      }
-      .navbar-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.7em;
-        margin-right: 1.5em;
-      }
-      .navbar-logo {
-        height: 32px;
-        width: 32px;
-        border-radius: 50%;
-        object-fit: cover;
-        background: #2e3440;
-      }
-      .navbar-title {
-        color: #fff;
-        font-weight: 700;
-        font-size: 1.15em;
-        letter-spacing: 0.03em;
+        overflow: hidden;
+        position: fixed;
+        z-index: 999;
+        animation: fadeIn 0.3s ease;
+        padding: 0.5em 1em;
       }
       .nav-buttons {
-        display: flex;
-        align-items: center;
-        gap: 0.7em;
         list-style: none;
         margin: 0;
         padding: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
       }
       .nav-buttons li {
         display: flex;
@@ -70,13 +114,15 @@
         text-decoration: none;
         padding: 0.4em 0.7em;
         border-radius: 1em;
-        transition: background 0.15s;
+        transition: background 0.15s, color 0.15s, font-size 0.15s;
         font-size: 1.1em;
         display: flex;
         align-items: center;
       }
       .nav-buttons a:hover, .nav-buttons a.active {
         background: #5e81ac;
+        color: #fff;
+        font-size: 1.18em;
       }
       .nav-buttons a.disabled {
         opacity: 0.5;
@@ -88,10 +134,22 @@
         background: #434c5e;
         border-radius: 1.2em;
         padding: 0.2em 0.7em;
-        min-width: 220px;
+        min-width: 228px;
         max-width: 320px;
         margin: 0 0.5em;
         position: relative;
+      }
+      .small-searchbar #lock-indicator {
+        position: absolute;
+        left: 0.9em;
+        top: 50%;
+        transform: translateY(-60%);
+        display: flex;
+        align-items: center;
+        z-index: 2;
+      }
+      .small-searchbar #lock-svg {
+        position: static;
       }
       .small-searchbar input {
         background: transparent;
@@ -100,7 +158,7 @@
         font-size: 1em;
         width: 100%;
         outline: none;
-        padding-left: 1.7em;
+        padding-left: 1.6em !important;
       }
       .small-searchbar svg {
         position: absolute;
@@ -132,73 +190,44 @@
         background: #222;
         display: block;
       }
+      @media (max-width: 1000px) {
+        .navbar {
+          width: 99vw;
+          min-width: 0;
+          padding: 0.2em 0.2em;
+        }
+        .small-searchbar {
+          min-width: 120px;
+          max-width: 180px;
+        }
+      }
     </style>
   </head>
   <body>
-    <nav class="floating-navbar">
-      <div class="navbar-brand">
-        <img src="globe-with-meridians-emoji-1024x1024-nntfxojt (1).png" alt="sebudaca logo" class="navbar-logo" />
-        <span class="navbar-title">sebudaca</span>
-      </div>
+    <div class="navbar" style="display: block;">
       <ul class="nav-buttons">
-        <li>
-          <a id="backIcon" href="#" class="disabled" title="Back">
-            <!-- Back SVG (Flaticon style) -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </li>
-        <li>
-          <a id="refreshIcon" href="#" title="Refresh">
-            <!-- Refresh SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93 4.93a10 10 0 1 1-1.41 1.41" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="23 4 23 10 17 10" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </li>
-        <li>
-          <a id="forwardIcon" href="#" class="disabled" title="Forward">
-            <!-- Forward SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </li>
-        <li>
-          <a id="fullscreenIcon" href="#" title="Fullscreen">
-            <!-- Fullscreen SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-16h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </li>
+        <li><a id="backIcon" href="#" class="disabled" title="Back"><i class="fa-solid fa-arrow-left"></i></a></li>
+        <li><a id="refreshIcon" href="#" title="Refresh"><i class="fa-solid fa-rotate-right"></i></a></li>
+        <li><a id="forwardIcon" href="#" class="disabled" title="Forward"><i class="fa-solid fa-arrow-right"></i></a></li>
+        <li><a id="fullscreenIcon" href="#" title="Fullscreen"><i class="fa-solid fa-expand"></i></a></li>
         <li>
           <div class="small-searchbar" style="position: relative;">
-            <!-- Lock SVG -->
-            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17 11V7a5 5 0 0 0-10 0v4" stroke="#bfc9db" stroke-width="2" fill="none"/><rect x="5" y="11" width="14" height="10" rx="2" stroke="#bfc9db" stroke-width="2" fill="none"/></svg>
+            <span id="lock-indicator" title="Connection is secure">
+              <svg id="lock-svg" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M17 11V7a5 5 0 0 0-10 0v4" stroke="#4caf50" stroke-width="2" fill="none"/>
+                <rect x="5" y="11" width="14" height="10" rx="2" stroke="#4caf50" stroke-width="2" fill="none"/>
+              </svg>
+            </span>
             <input class="waves" type="text" id="searchInputt" placeholder="Search for a query or enter a URL..." autocomplete="off" style="padding-left: 40px;">
             <span class="shortcut-indicator-2">Ctrl + S</span>
           </div>
         </li>
-        <li>
-          <a href="index.html" title="Home">
-            <!-- Home SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12l9-9 9 9" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21V9h6v12" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </li>
-        <li>
-          <a href="games.html" title="Games">
-            <!-- Gamepad SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="6" stroke="#eceff4" stroke-width="2"/><circle cx="8" cy="12" r="1" fill="#eceff4"/><circle cx="16" cy="12" r="1" fill="#eceff4"/><path d="M12 8v8" stroke="#eceff4" stroke-width="2"/><path d="M8 12h8" stroke="#eceff4" stroke-width="2"/></svg>
-          </a>
-        </li>
-        <li>
-          <a href="apps.html" title="Apps">
-            <!-- Grid SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="#eceff4" stroke-width="2"/></svg>
-          </a>
-        </li>
-        <li>
-          <a id="erudaIcon" href="#" title="Dev Tools">
-            <!-- Code SVG -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polyline points="16 18 22 12 16 6" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="8 6 2 12 8 18" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </li>
+        <li><a href="index.html" title="Home"><i class="fa-solid fa-house"></i></a></li>
+        <li><a href="games.html" title="Games"><i class="fa-solid fa-gamepad"></i></a></li>
+        <li><a href="apps.html" title="Apps"><i class="fa-solid fa-th"></i></a></li>
+        <li><a id="erudaIcon" href="#" title="Dev Tools"><i class="fa-solid fa-code"></i></a></li>
       </ul>
-    </nav>
+    </div>
     <div class="iframe-container">
       <iframe id="cool-iframe"></iframe>
     </div>
@@ -209,18 +238,33 @@
     <p id="uv-error"></p>
     <pre id="uv-error-code"></pre>
     <!-- Ultraviolet scripts first -->
-    <script src="uv.bundle.js"></script>
-    <script src="uv.client.js"></script>
-    <script src="uv.config.js"></script>
-    <script src="search.js"></script>
+    <script src="uv/uv.bundle.js" defer></script>
+    <script src="uv/uv.config.js" defer></script>
+    <script src="register-sw.js" defer></script>
+    <script src="uv/uv.handler.js"></script>
     <script src="index.js"></script>
+    <script src="error.js"></script>
+    <script src="loading.js"></script>
     <!-- Then your inline script above -->
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Handle ?site= param for app shortcuts
+  // Check if UV scripts are loaded
+  if (!window.__uv$config || typeof window.__uv$config.encodeUrl !== 'function') {
+    // If error.js exists, use it to redirect to 404
+    if (typeof window.show404 === 'function') {
+      window.show404();
+    } else {
+      window.location.href = '404.html';
+    }
+    return;
+  }
+
   const params = new URLSearchParams(window.location.search);
+  const urlParam = params.get('url');
   const site = params.get('site');
   let url = '';
+
+  // App shortcuts
   switch (site) {
     case 'duckduckgo': url = 'https://duckduckgo.com'; break;
     case 'wikipedia': url = 'https://www.wikipedia.org'; break;
@@ -244,86 +288,89 @@ document.addEventListener('DOMContentLoaded', function() {
     case 'amazon': url = 'https://www.amazon.com'; break;
     default: url = '';
   }
+
   const iframe = document.getElementById('cool-iframe');
   const searchInput = document.getElementById('searchInputt');
 
   // Helper: encode and set iframe src via UV
-  function goTo(url) {
-    if (!window.__uv$config || typeof window.__uv$config.encodeUrl !== 'function') return;
-    iframe.src = window.__uv$config.prefix + window.__uv$config.encodeUrl(url);
-    if (url) {
-      history.pushState(null, '', '?site=' + site + '&url=' + encodeURIComponent(url));
-    } else {
-      history.pushState(null, '', window.location.pathname);
-    }
+  function goTo(targetUrl) {
+    if (!targetUrl) return;
+    iframe.src = window.__uv$config.prefix + window.__uv$config.encodeUrl(targetUrl);
+    searchInput.value = targetUrl;
   }
 
-  // Initial URL handling
-  if (url) {
+  // If loaded from index.html with a url param, go to that site
+  if (urlParam) {
+    goTo(urlParam);
+  } else if (url) {
     goTo(url);
   }
 
-  // Search input handling
-  searchInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      const query = searchInput.value.trim();
-      if (query) {
-        if (query.startsWith('http://') || query.startsWith('https://')) {
-          goTo(query);
-        } else {
-          goTo('https://www.google.com/search?q=' + encodeURIComponent(query));
+  // Search bar logic: on Enter, proxy the URL or search
+  if (searchInput) {
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        let val = searchInput.value.trim();
+        if (!val) return;
+        // If not a URL, treat as search
+        if (!/^https?:\/\//.test(val) && !val.includes('.')) {
+          val = 'https://duckduckgo.com/?q=' + encodeURIComponent(val);
+        } else if (!/^https?:\/\//.test(val)) {
+          val = 'https://' + val;
         }
+        goTo(val);
       }
+    });
+  } else {
+    // If search bar is missing, redirect to 404
+    window.location.href = '404.html';
+  }
+
+  // Lock SVG logic
+  const lockIndicator = document.getElementById('lock-indicator');
+  const lockSvg = document.getElementById('lock-svg');
+  function updateLockIcon(url) {
+    let isSecure = false;
+    try {
+      const u = new URL(url);
+      isSecure = u.protocol === 'https:';
+    } catch {
+      isSecure = false;
     }
-  });
-
-  // Back and forward button handling
-  let currentUrl = '';
-  window.addEventListener('message', function(event) {
-    if (event.origin !== window.location.origin) return;
-    const { type, url } = event.data;
-    if (type === 'uv.navigation') {
-      if (url) {
-        currentUrl = url;
-        searchInput.value = '';
-      }
-    }
-  });
-
-  document.getElementById('backIcon').addEventListener('click', function() {
-    iframe.contentWindow.postMessage({ type: 'uv.back' }, '*');
-  });
-
-  document.getElementById('forwardIcon').addEventListener('click', function() {
-    iframe.contentWindow.postMessage({ type: 'uv.forward' }, '*');
-  });
-
-  document.getElementById('refreshIcon').addEventListener('click', function() {
-    iframe.contentWindow.postMessage({ type: 'uv.refresh' }, '*');
-  });
-
-  document.getElementById('fullscreenIcon').addEventListener('click', function() {
-    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-    if (isFullscreen) {
-      document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen();
+    if (isSecure) {
+      lockSvg.innerHTML = `
+        <path d="M17 11V7a5 5 0 0 0-10 0v4" stroke="#4caf50" stroke-width="2" fill="none"/>
+        <rect x="5" y="11" width="14" height="10" rx="2" stroke="#4caf50" stroke-width="2" fill="none"/>
+      `;
+      lockIndicator.title = "Connection is secure";
     } else {
-      iframe.requestFullscreen ? iframe.requestFullscreen() : iframe.webkitRequestFullscreen();
+      lockSvg.innerHTML = `
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#ff9800" stroke-width="2" fill="none"/>
+        <rect x="5" y="11" width="14" height="10" rx="2" stroke="#ff9800" stroke-width="2" fill="none"/>
+        <line x1="12" y1="17" x2="12" y2="15" stroke="#ff9800" stroke-width="2"/>
+        <circle cx="12" cy="18" r="1" fill="#ff9800"/>
+      `;
+      lockIndicator.title = "Warning: Connection is not secure";
     }
-  });
+  }
 
-  // Dev tools (Eruda) integration
-  document.getElementById('erudaIcon').addEventListener('click', function() {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/eruda';
-    script.onload = function() {
-      eruda.init();
-      const style = document.createElement('style');
-      style.textContent = 'eruda { z-index: 9999 !important; }';
-      document.head.appendChild(style);
-    };
-    document.body.appendChild(script);
-  });
+  // Update lock icon on navigation
+  function goTo(targetUrl) {
+    if (!targetUrl) return;
+    iframe.src = window.__uv$config.prefix + window.__uv$config.encodeUrl(targetUrl);
+    searchInput.value = targetUrl;
+    updateLockIcon(targetUrl);
+  }
+
+  // Also update lock icon on manual input change (optional)
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      updateLockIcon(searchInput.value.trim());
+    });
+  }
 });
     </script>
+    <script src="search-nav.js"></script>
   </body>
 </html>

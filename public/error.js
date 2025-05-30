@@ -18,3 +18,7 @@ registerButton.addEventListener("click", async () => {
     registerButton.classList.remove("show");
   }
 });
+
+window.show404 = function() {
+  window.location.href = '404.html';
+};
